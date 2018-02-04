@@ -1,4 +1,4 @@
-\documentclass{standalone}
+\documentclass[dvipdfmx]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{newtxtext, newtxmath}
 
@@ -9,7 +9,8 @@
   \begin{tikzpicture}[
     grow via three points={one child at (0.5,-0.7) and
     two children at (0.5,-0.7) and (0.5,-1.4)},
-    edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+    edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}
+    ]
     \tikzset{every node/.style={draw=black,thick,anchor=west}}
     \node {root}
       child { node {man} }
