@@ -7,11 +7,12 @@ all: $(PNG_FILE)
 
 %.png: %.tex
 	mkdir -p $(TMP)/$$$$ && \
-	platex -halt-on-error -output-directory=$(TMP)/$$$$ $< && \
+	platex -shell-escape -halt-on-error -output-directory=$(TMP)/$$$$ $< && \
 	dvipdfmx -d5 -o $(TMP)/$$$$/$(basename $(notdir $<)).pdf $(TMP)/$$$$/$(basename $(notdir $<)).dvi && \
 	convert -density 300 $(TMP)/$$$$/$(basename $(notdir $<)).pdf -quality 90 $@ && \
-	rm -r $(TMP)/$$$$ && \
-	touch $@
+	touch $@ \
+	&& rm -r $(TMP)/$$$$ \
+	|| rm -r $(TMP)/$$$$
 
 purge:
 	$(RM) -r $(TMP)
