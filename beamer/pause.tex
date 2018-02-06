@@ -1,44 +1,7 @@
 
 \documentclass[dvipdfmx, 14pt]{beamer}
 \usepackage{pgfpages}
-\usepackage{bxdpx-beamer}
-
-%%%% Viewerの文字化け対策 %%%%
-\usepackage{atbegshi}
-\ifnum 42146=\euc"A4A2
-\AtBeginShipoutFirst{\special{pdf:tounicode EUC-UCS2}}
-\else
-\AtBeginShipoutFirst{\special{pdf:tounicode 90ms-RKSJ-UCS2}}
-\fi
-
-%%%% スライドの見た目 %%%%
-\usetheme{default}
-\usecolortheme{default}
-\usefonttheme{professionalfonts}
-\setbeamertemplate{headline}{
-  \leavevmode%
-  \vskip10pt% 上のマージン（狭すぎると見出しがスクリーンからはみ出る）
-}
-\setbeamerfont{frametitle}{size=\Large} % 見出しのサイズ
-\setbeamertemplate{frametitle}[default][center] % 見出しの中央揃え
-\setbeamertemplate{navigation symbols}{} % ナビゲーションの無効化
-\setbeamerfont{footline}{size=\scriptsize, series=\bfseries} % footerのフォント
-\setbeamertemplate{footline}{
-  \leavevmode%
-  \raggedleft% 右寄せ
-  \insertframenumber{} / \inserttotalframenumber% ページ番号 / ページ総数
-  \hspace*{5ex}% 右のマージン
-  \vskip15pt% 下のマージン（狭すぎると行番号がスクリーンに映し出されない）
-}
-
-%%%% フォントの基本設定 %%%%
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc} % 8bit font
-\usepackage{lmodern} % Latin Modern font
-\usepackage{otf} % otf (font)
-\usepackage{bm} % bold math
-\usepackage{newtxtext, newtxmath} % newtx (font)
-\renewcommand{\kanjifamilydefault}{\gtdefault} % fontfamily: Gothic
+\usepackage{beamer/myslide}
 
 \begin{document}
 
