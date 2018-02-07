@@ -10,9 +10,9 @@
   \begin{tikzpicture}[
     grow via three points={one child at (0.5,-0.7) and
     two children at (0.5,-0.7) and (0.5,-1.4)},
-    edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}
+    edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)},
+    every node/.style={draw=black, thick, anchor=west}
     ]
-    \tikzset{every node/.style={draw=black,thick,anchor=west}}
     \node {root}
       child { node {man} }
       child { node {src}
