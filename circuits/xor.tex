@@ -14,7 +14,7 @@
     \draw (2,0) node (f2) [or gate] {};
     \draw (4,1) node (f3) [and gate] {};
 
-    \draw[opacity=0] (0,0) -- (0,3) node (y axis) {};
+    \draw[opacity=0] (0,0) -- (up:1cm) node (y axis) {};
     \draw (f1.input 1 -| y axis) node (x1) {$x_1$};
     \draw (f2.input 2 -| y axis) node (x2) {$x_2$};
     \draw (f3.output) ++(1,0) node (y) {$y$};
