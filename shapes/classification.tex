@@ -1,0 +1,44 @@
+
+\documentclass[dvipdfmx]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+% \usepackage{newtxtext, newtxmath}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.symbols}
+
+\begin{document}
+  \begin{tikzpicture}
+    \tikzset{
+      from/.style={<-, > = stealth},
+      to/.style={->, > = stealth},
+    }
+
+    \draw (0,0) node (input) [rectangle, draw] {Image};
+    \draw (6,2) node (output0) [circle, draw] {$y_0$};
+    \draw (6,1) node (output1) [circle, draw] {$y_1$};
+    \draw (6,0) node (output2) [circle, draw] {$y_2$};
+    \draw (6,-1) node (outputn) {$\vdots$};
+    \draw (6,-2) node (output9) [circle, draw] {$y_9$};
+    \draw (3,0) node (process) [cloud, cloud ignores aspect, draw] {何らかの計算}
+      edge[from] (input)
+      edge[to] (output0) edge[to] (output1) edge[to] (output2) edge[to] (output9);
+
+    % text: =
+    \draw[opacity=0] (output0) ++(right:0.6) -- +(up:1) node (assign axis) {};
+    \foreach \y in {0, 1, 2, 9}
+      \draw (output\y -| assign axis) node {=};
+
+    % text:「n」
+    \draw[opacity=0] (output0) ++(right:1.0) -- +(up:1) node (label axis) {};
+    \foreach \y in {0, 1, 2, 9}
+      \draw (output\y -| label axis) node {「\y」};
+    \draw (outputn -| label axis) node {$\vdots$};
+
+    % text: 入力層、出力層
+    \draw[opacity=0] (output9) ++(down:1cm) -- +(right:1cm) node (x axis) {};
+    \draw (input   |- x axis) node {入力層};
+    \draw (output0 |- x axis) node {出力層};
+
+  \end{tikzpicture}
+\end{document}
