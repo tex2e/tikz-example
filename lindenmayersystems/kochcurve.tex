@@ -1,0 +1,25 @@
+
+\documentclass[dvipdfmx]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext, newtxmath}
+
+\usepackage{tikz}
+\usetikzlibrary{lindenmayersystems}
+
+\begin{document}
+  \begin{tikzpicture}
+    \pgfdeclarelindenmayersystem{Koch curve}{
+      % Rules:
+      % • F move forward a certain distance, drawing a line.
+      % • f move forward a certain distance, without drawing a line.
+      % • + turn left by some angle.
+      % • - turn right by some angle.
+      % • [ save the current state (i.e., the position and direction).
+      % • ] restore the last saved state.
+      \rule{F -> F-F++F-F}
+    }
+    \shadedraw [top color=white, bottom color=blue!50, draw=blue!50!black]
+      [l-system={Koch curve, step=2pt, angle=60, axiom=F++F++F, order=3}]
+      lindenmayer system -- cycle;
+  \end{tikzpicture}
+\end{document}
