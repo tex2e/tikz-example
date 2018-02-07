@@ -7,11 +7,10 @@
 \usetikzlibrary{graphs}
 
 \begin{document}
-\begin{tikzpicture}[>=stealth, very thick]
+\begin{tikzpicture}[>=stealth]
   \tikzset{process/.style={
-    rectangle, minimum size = 6mm, rounded corners = 3mm,
-    very thick, draw = black!50,
-    top color = white, bottom color = black!10,}
+    rectangle, minimum size = 6mm, rounded corners = 3mm, draw = black!50,
+    top color = white, bottom color = black!10}
   }
   \graph [grow right sep] {
     "データ" -> "前処理"[process] -> "正規化"[process] ->[out=0, in=180] {
