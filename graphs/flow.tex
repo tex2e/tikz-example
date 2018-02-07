@@ -1,0 +1,24 @@
+
+\documentclass[dvipdfmx]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext, newtxmath}
+
+\usepackage{tikz}
+\usetikzlibrary{graphs}
+
+\begin{document}
+\begin{tikzpicture}[>=stealth, very thick]
+  \tikzset{process/.style={
+    rectangle, minimum size = 6mm, rounded corners = 3mm,
+    very thick, draw = black!50,
+    top color = white, bottom color = black!10,}
+  }
+  \graph [grow right sep] {
+    "データ" -> "前処理"[process] -> "正規化"[process] ->[out=0, in=180] {
+      "特徴選択"[process],
+      "次元削減"[process]
+    }
+    ->[out=0, in=180] "分析"[process] -> "評価"[process]
+  };
+\end{tikzpicture}
+\end{document}
