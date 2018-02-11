@@ -1,0 +1,31 @@
+
+\documentclass[dvipdfmx]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext, newtxmath}
+
+\usepackage{tikz}
+\usetikzlibrary{graphs}
+\usetikzlibrary{matrix}
+
+\begin{document}
+\begin{tikzpicture}[>=stealth, auto]
+  \tikzset{
+    process/.style={
+      rectangle, minimum size = 6mm, rounded corners = 1mm,
+      text width = 3cm, align = center,
+      draw = black!50, top color = white, bottom color = black!10,
+    },
+  }
+  \matrix [matrix of nodes, nodes={ process }, ] {
+    |(p1)| フィールドの洗い出し &[1cm] \\[5mm]
+    |(p2)| 第一正規化 & \\[5mm]
+    |(p3)| 第二正規化 & \\[5mm]
+    |(p4)| 第三正規化 & |(p5)| 第四正規化 \\[5mm]
+    |(p9)| テーブルの実装 & |(p6)| 第五正規化 \\[5mm]
+  };
+  \graph {
+    (p1) -> (p2) -> (p3) -> (p4) -> (p5) -> (p6) -> (p9),
+    (p4) -> (p9),
+  };
+\end{tikzpicture}
+\end{document}
