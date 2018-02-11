@@ -1,0 +1,45 @@
+
+\documentclass[dvipdfmx]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext, newtxmath}
+
+\usepackage{tikz}
+\usepackage{tikzpeople}
+\usetikzlibrary{shapes}
+\usetikzlibrary{shapes.callouts}
+\usetikzlibrary{shapes.symbols}
+\usetikzlibrary{positioning}
+
+\begin{document}
+  \begin{tikzpicture}[> = latex, font = \gtfamily]
+    \tikzset{
+      database/.style={
+        draw, cylinder, shape border rotate=90,
+        aspect=0.25, minimum width=1cm, minimum height=0.8cm,
+      },
+      mycallout/.style={
+        draw, rectangle callout,
+        rounded corners=2pt,
+        callout absolute pointer={#1},
+        callout pointer width=1cm,
+        align=center
+      },
+    }
+    \node[bob, minimum width=0.6cm] (user) {};
+    \node[database, right=3cm of user] (db) {DB};
+    \draw[->, very thick, transform canvas={yshift=2mm}]  (user) -- (db) node[midway] (user2db) {};
+    \draw[<-, very thick, transform canvas={yshift=-2mm}] (user) -- (db);
+
+    \node[mycallout={([yshift=3mm]user2db)}, text width=6cm, scale=0.6,
+      above right=1cm and -10mm of user2db, ]
+      { SELECT 名前 FROM 住所録\\WHERE 年齢=20 AND 性別=女性 };
+    \node[mycallout={([yshift=-3mm]user2db)}, text width=6cm, scale=0.6,
+      below left=1cm and -10mm of user2db, ]
+      { 八幡さん、黒崎さん、東郷さん、\\赤間さん、古賀さん、$\dots$ };
+
+    \node[mycallout={([shift={(-5mm, 5mm)}]user)}, cloud callout, text width=5cm, scale=0.6,
+      cloud ignores aspect,
+      above left=10mm and -5mm of user, ]
+      { 住所録から20歳の女性を探して名前を教えて欲しい };
+  \end{tikzpicture}
+\end{document}
