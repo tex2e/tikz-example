@@ -1,0 +1,31 @@
+
+\documentclass[dvipdfmx]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext, newtxmath}
+
+\usepackage{tikz}
+
+\begin{document}
+  \begin{tikzpicture}[> = latex]
+    \draw[opacity=0] (-3,0) -- (3,0);
+
+    % Ring buffer
+    \draw (0,0) circle (1cm) circle (2cm);
+    \foreach \i in {1,...,8} {
+      \draw (360 * -\i/8: 1cm) -- (360 * -\i/8: 2cm);
+      \draw (360 * -\i/8 + 360/8/2: 1.5cm) node (ring buffer \i) {};
+    }
+
+    % Data in buffer
+    \foreach \i\data in {2/D1, 3/D2, 4/D3, 5/D4}
+      \draw (ring buffer \i) node {\data};
+
+    % Arrows
+    \draw[->] (360 * -1/8: 2.3cm) arc (360 * -1/8: 360 * -5/8: 2.3cm)
+      node[at start, circle, fill=black, minimum size=1mm, inner sep=0mm] {}
+      node[midway, auto] {データ範囲};
+    \draw[->, ultra thick] (360 * -5/8 + 360/8/2: 3cm) -- (360 * -5/8 + 360/8/2: 2.5cm)
+      node[at start, left, text width=2cm, align=center] {最新の\\データ位置};
+
+  \end{tikzpicture}
+\end{document}
