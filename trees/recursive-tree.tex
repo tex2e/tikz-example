@@ -1,0 +1,77 @@
+
+\documentclass[dvipdfmx]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext, newtxmath}
+
+\usepackage{tikz}
+\usetikzlibrary{trees}
+
+\begin{document}
+  \begin{tikzpicture}[> = latex]
+    \tikzset{
+      branch/.style={ fill, shape=circle, minimum size=5pt, inner sep=0pt },
+    }
+    \draw[dashed] (0:1cm) arc (0:-180:1cm);
+    \draw (-10:2.5cm) node {頂点の次数 = $a$};
+
+    % Trees
+    \begin{scope}[
+      level 1/.style={ level distance=1.5cm, sibling distance=2cm },
+      level 2/.style={ level distance=1.5cm, sibling distance=0.5cm },
+      ]
+      \node (root) [branch] {}
+        child { node[branch] (tree1) {}
+          child {node[branch] (tree1-1) {}}
+          child {node[branch] (tree1-2) {}}
+          child {node[branch] (tree1-3) {}}
+        }
+        child { node[branch] (tree2) {}
+          child {node[branch] (tree2-1) {}}
+          child {node[branch] (tree2-2) {}}
+          child {node[branch] (tree2-3) {}}
+        }
+        child { node[branch] (tree3) {}
+          child {node[branch] (tree3-1) {}}
+          child {node[branch] (tree3-2) {}}
+          child {node[branch] (tree3-3) {}}
+        };
+    \end{scope}
+    \begin{scope}[
+      level 1/.style={ level distance=1.5cm, sibling distance=0.5cm },
+      ]
+      \foreach[count=\i] \x in {-2,-1,0,2} {
+        \draw (0,0) +(\x*2cm,-6cm) coordinate (subtree pos);
+        \draw (subtree pos) node (subtree\i) [branch] {}
+          child {node[branch] (subtree\i-1) {}}
+          child {node[branch] (subtree\i-2) {}}
+          child {node[branch] (subtree\i-3) {}};
+      }
+    \end{scope}
+
+    % dots
+    \foreach \y in {0, 0.3, 0.6, 0.9}
+      \draw (subtree3) ++(0,1+\y) node[branch, minimum size=3pt] {};
+    \foreach \x in {0, 0.3, 0.6, 0.9}
+      \draw (subtree3) ++(1.5+\x,-0.7cm) node[branch, minimum size=3pt] {};
+
+    % double arrows
+    \begin{scope}[shorten > = -3pt, shorten < = -3pt]
+      \draw[<->] (subtree4-3) ++(right:1cm) node (tree right) {}
+        -- (tree right |- root)
+        node[midway, right] {高さ = $\log_b n$};
+      \draw[<->] (subtree1-1) ++(down:.5cm) node (tree below) {}
+        -- (tree below -| subtree4-3)
+        node[midway, below] {幅 = $a^{\log_b n} = n^{\log_b a}$};
+    \end{scope}
+
+
+    % labels
+    \draw (subtree1-1) ++(left:3cm) node (tree left) {};
+    \draw (tree left) node[right] {分割サイズ = $1$};
+    \draw (tree left |- subtree1) node[right] {分割サイズ = $b$};
+    \draw (tree left |- tree1-1) node[right] {分割サイズ = $n/b^2$};
+    \draw (tree left |- tree1) node[right] {分割サイズ = $n/b$};
+    \draw (tree left |- root) node[right] {分割サイズ = $n$};
+
+  \end{tikzpicture}
+\end{document}
